@@ -4,7 +4,12 @@
 <h4><%= @group.name %></h4>
 <p>Users:</p>
 <ul>
-  <% @group.user_groups.each do |user_group| %>
-    <li><%= user_group.user.username %></li>
+  <% @group.users.each do |user| %>
+    <% if user.charges.first %>
+    <li><%= user.username %> - <%= user.charges.first.category %></li>
+  <% end %>
   <% end %>
 </ul>
+
+<%= render 'lay_charges_partial' %>
+

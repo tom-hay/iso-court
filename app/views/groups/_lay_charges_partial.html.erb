@@ -1,0 +1,20 @@
+<div class="container">
+  <div>
+    <h1>Snitch</h1>
+  </div>
+  <%= simple_form_for [@group, Charge.new] do |f| %>
+  <div class="form-card">
+    <%#= f.association :user, collection: @group.users.collect { |x|  [ x.id.to_i, x.username ] }, label_method: :second, value_method: :first, prompt: "Choose a User" %>
+    <%= f.input :user_id, collection: @group.users.collect { |x|  [ x.id.to_i, x.username ] }, label_method: :second, value_method: :first, prompt: "Choose a User" %>
+    <%#= f.input :user, as: :radio_buttons, collection: Group.find(params[:id]).users.collect { |x|  x.username } %>
+    <%= f.input :category, as: :radio_buttons, collection: ["Hygiene", "Media",
+      "Information", "Social distancing", "Calm approach",
+      "Fight boredom", "Positive focus", "Social connection", "Physical activity",
+      "Work from home", "Tidying"] %>
+    <%= f.input :description %>
+    <div class="btn btn-primary">
+      <%= f.button :submit, 'Lay Charge' %>
+    </div>
+  </div>
+    <% end %>
+</div>
