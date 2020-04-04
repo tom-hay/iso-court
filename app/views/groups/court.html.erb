@@ -1,3 +1,30 @@
-<h1>made it here</h1>
+<h1>Let the court begin</h1>
+<% team_users  = Group.find(params["id"].to_i ).users.all.collect{ |x| x.username } %>
+<% group_charges = Group.find(params["id"].to_i ).users.all.collect{ |x| x.charge_ids } %>
+<div class="container">
+  <% team_users.each_with_index do |name, index| %>
+  <div class="card text-center">
+    <div class="card-header">
+      <%= name.capitalize %>'s Charges
+    </div>
+    <div class="card-body">
+      <% if group_charges[index].empty? %>
+      <h5 class="card-title">Has no Charges Against</h5>
+      <p class="card-text">Seems like they have been a good citizen</p>
+      <% else %>
+      <% group_charges[index].each do |charge| %>
+      <% current_charge = Charge.find(charge) %>
+      <h5 class="card-title"><%= current_charge.category %></h5>
+      <p class="card-text"><%= current_charge.description %></p>
+      <a href="#" class="btn btn-primary">Sentence</a>
+      <% end %>
+      <% end %>
+      <a href="#" class="btn btn-primary">Next Case</a>
+    </div>
+    <div class="card-footer text-muted">
+    </div>
+  </div>
+  <% end %>
+</div>
 
-<h1><% Group.find(params["id"].to_i ).users.all.collect{ |x| x.charge_ids }  %></h1>
+
