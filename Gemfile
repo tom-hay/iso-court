@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'simple_form'
 gem 'dotenv-rails', groups: [:development, :test]
+gem 'cloudinary', '~> 1.12.0'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
