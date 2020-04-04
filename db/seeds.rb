@@ -3,6 +3,7 @@ require 'faker'
 FAMILY = ['Pappa Bear', 'Ben', 'Emily', 'Pops', 'Nonna', 'Boss Lady']
 FRIENDS = ['Tom', 'Wes', 'Cam', 'Juliette', 'Cassi', 'Mannon']
 
+User_charge.destroy_all
 puts "destroying Sentences"
 Sentence.destroy_all
 puts "destroying Charges"
@@ -11,7 +12,6 @@ puts "destroying Commitments"
 Commitment.destroy_all
 puts "destroying Links Between"
 
-User_charge.destroy_all
 User_commitment.destroy_all
 puts "destroying Users"
 User_group.destroy_all
