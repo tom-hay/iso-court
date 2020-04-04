@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get 'sentences/create'
   get 'sentences/destroy'
 
+  get 'groups/:id/court', to: 'groups#court', as: :court
   get 'groups/index'
   get 'groups/show'
   get 'groups/new'

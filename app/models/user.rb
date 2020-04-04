@@ -11,4 +11,23 @@ class User < ApplicationRecord
   has_many :commitments, through: :user_commitments
   has_many :user_groups
   has_many :groups, through: :user_groups
+
+  def setting_total
+    commitments.count.to_f + charges.count + sentences.count
+  end
+
+  def commitments_score
+    score = (commitments.count.to_f / setting_total) * 100
+    score.round
+  end
+
+  def charges_score
+    score = (charges.count.to_f / setting_total) * 100
+    score.round
+  end
+
+  def sentences_score
+    score = (sentences.count.to_f / setting_total) * 100
+    score.round
+  end
 end
