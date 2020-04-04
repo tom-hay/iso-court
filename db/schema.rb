@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_070529) do
+ActiveRecord::Schema.define(version: 2020_04_04_121717) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -41,6 +41,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_070529) do
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_charges_on_user_id"
   end
 
   create_table "commitments", force: :cascade do |t|
@@ -62,15 +64,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_070529) do
     t.datetime "updated_at", null: false
     t.bigint "charge_id"
     t.index ["charge_id"], name: "index_sentences_on_charge_id"
-  end
-
-  create_table "user_charges", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "charge_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["charge_id"], name: "index_user_charges_on_charge_id"
-    t.index ["user_id"], name: "index_user_charges_on_user_id"
   end
 
   create_table "user_commitments", force: :cascade do |t|
@@ -106,9 +99,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_070529) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "charges", "users"
   add_foreign_key "sentences", "charges"
-  add_foreign_key "user_charges", "charges"
-  add_foreign_key "user_charges", "users"
   add_foreign_key "user_commitments", "commitments"
   add_foreign_key "user_commitments", "users"
   add_foreign_key "user_groups", "groups"
