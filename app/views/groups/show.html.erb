@@ -1,18 +1,42 @@
-<h1>Groups#show</h1>
-<p>Find me in app/views/groups/show.html.erb</p>
 
-<h4><%= @group.name %></h4>
-<p>Users:</p>
-<ul>
-  <% @group.users.each do |user| %>
-    <% if user.charges.first %>
-    <li><%= user.username %> - <%= user.charges.first.category %></li>
-  <% end %>
-  <% end %>
-</ul>
+<h2><%= @group.name %></h4>
+<!-- Put this into a partial -->
+<div class="container">
+  <% Group.find(params[:id]).user_ids.each do |x| %>
+  <% y = User.find(x) %>
+  <div class="card" style="width: 18rem;">
+    <img src="..." class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title"><%= y.username %></h5>
+      <p class="card-text">
+      <div class="score-bar d-flex flex-row">
+        <div class="commitments-filler" style="width: <%= y.commitments_score %>%;">
+        </div>
+        <div class="charges-filler" style="width: <%= y.charges_score %>%;">
+        </div>
+      </div>
+      <h6 class="card-subtitle mt-2 mb-3 text-center"><%= y.commitments.count %> commitments</h6>
+      <h6 class="card-subtitle mb-3 text-center"><%= y.charges.count %> charges</h6>
+      <h6 class="card-subtitle mb-3 text-center"><%= y.sentences.count %> sentences</h6>
+      </p>
+    </div>
+  </div>
+</div>
+<!--  -->
+<!-- Put this into partial -->
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Weekly Commitment </div>
+  <div class="card-body">
+    <p class="card-text"><%= current_user.commitments.first.description %></p>
+  </div>
+</div>
+<!--  -->
+
+
+<%= link_to 'Snitch em up', "", class: "btn btn-primary" %>
+<%= link_to 'Start Trial', court_path, class: "btn btn-primary" %>
 
 <%= render 'lay_charges_partial' %>
 <h3>Snitch Someone</h3>
 
 <%= render partial: "shared/scoreboard" %>
-
