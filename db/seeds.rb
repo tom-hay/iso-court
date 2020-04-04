@@ -3,7 +3,6 @@ require 'faker'
 FAMILY = ['Pappa Bear', 'Ben', 'Emily', 'Pops', 'Nonna', 'Boss Lady']
 FRIENDS = ['Tom', 'Wes', 'Cam', 'Juliette', 'Cassi', 'Mannon']
 
-UserCharge.destroy_all
 puts "destroying Sentences"
 Sentence.destroy_all
 puts "destroying Charges"
@@ -98,10 +97,9 @@ SENTENCES = [
 ]
 puts "making charges"
 CHARGES.each_with_index do |name, index|
-  Charge.create(category: name[0], description: name[1])
+  the_user = USERS.sample
+  Charge.create(category: name[0], description: name[1], user_id: the_user)
   puts "#{name[0]}: #{name[1]}"
   Sentence.create(name: SENTENCES[index], charge_id: Charge.last.id)
-  the_user = USERS.sample
-  UserCharge.create(user_id: the_user, charge_id: Charge.last.id)
   puts "#{User.find(the_user).username} charged with #{Charge.last.category}: #{Charge.last.description}, sentenced to #{Sentence.last.name}"
 end
