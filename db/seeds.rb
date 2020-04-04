@@ -3,18 +3,17 @@ require 'faker'
 FAMILY = ['Pappa Bear', 'Ben', 'Emily', 'Pops', 'Nonna', 'Boss Lady']
 FRIENDS = ['Tom', 'Wes', 'Cam', 'Juliette', 'Cassi', 'Mannon']
 
-User_charge.destroy_all
+UserCharge.destroy_all
 puts "destroying Sentences"
 Sentence.destroy_all
 puts "destroying Charges"
 Charge.destroy_all
+UserCommitment.destroy_all
 puts "destroying Commitments"
 Commitment.destroy_all
 puts "destroying Links Between"
-
-User_commitment.destroy_all
 puts "destroying Users"
-User_group.destroy_all
+UserGroup.destroy_all
 User.destroy_all
 puts "destroying Groups"
 Group.destroy_all
@@ -26,41 +25,41 @@ Group.create(name: 'Le Wagon Friends')
 puts "FRIENDS USERS"
 FRIENDS.each do |name|
   User.create(username: name, password: 'password', email: Faker::Internet.email)
-  User.last.group_id = Group.find_by(name: '')
-  puts "name: #{User.last.name}, email: #{User.last.email}"
+  UserGroup.create(group_id: (Group.find_by(name: 'Le Wagon Friends')).id, user_id: User.last.id)
+  puts "name: #{User.last.username}, email: #{User.last.email}"
 end
 puts "FAMILY USERS"
 FAMILY.each do |name|
   User.create(username: name, password: 'password', email: Faker::Internet.email)
-  User.last.group_id = Group.find_by(name: 'me familia')
-  puts "name: #{User.last.name}, email: #{User.last.email}"
+  UserGroup.create(group_id: (Group.find_by(name: 'me familia')).id, user_id: User.last.id)
+  puts "name: #{User.last.username}, email: #{User.last.email}"
 end
 
 COMMITMENTS = [
-  'Go for a walk each day',
-  'Each day do 30 push ups throughout the day',
-  'Each day do 30 sit ups throughout the day',
-  'Meditate for 30mins once a day',
-  'Don\'t touch your face without first washing hands',
-  'Drink atleast 2L of water each day',
-  'Have a peice of fruit once a day',
-  'Make your bed each day',
-  'Wake up before 9am each day',
-  'Talk to someone atleast once a day'
+  ['Exercise', 'Go for a walk each day'],
+  ['Exercise', 'Each day do 30 push ups throughout the day'],
+  ['Exercise', 'Each day do 30 sit ups throughout the day'],
+  ['Mindfulness', 'Meditate for 30mins once a day'],
+  ['Hygiene', 'Don\'t touch your face without first washing hands'],
+  ['Health', 'Drink atleast 2L of water each day'],
+  ['Health', 'Have a peice of fruit once a day'],
+  ['Cleanliness', 'Make your bed each day'],
+  ['Routine', 'Wake up before 9am each day'],
+  ['Connection', 'Talk to someone atleast once a day']
 ]
 
 puts "Making commitments"
 COMMITMENTS.each do |name|
-  Commitment.create(name: name)
+  Commitment.create(category: name[0], description: name[1])
 end
 
 puts "Assigning commitments"
 USERS = User.all.ids
 commitments = Commitment.all.ids
-users.each do |id|
+USERS.each do |id|
   the_commitment = commitments.sample
-  User_commitment.create(id_user: id, commitment_id: the_commitment)
-  "#{User.find(User_commitment.last.id_user).name} has to #{Commitment.find(the_commitment).name}"
+  UserCommitment.create(user_id: id, commitment_id: the_commitment)
+  "#{User.find(UserCommitment.last.user_id).username} has to #{Commitment.find(the_commitment).description}"
 end
 
 CHARGES = [
@@ -103,6 +102,6 @@ CHARGES.each_with_index do |name, index|
   puts "#{name[0]}: #{name[1]}"
   Sentence.create(name: SENTENCES[index], charge_id: Charge.last.id)
   the_user = USERS.sample
-  User_charge.create(id_user: the_user, id_charges: Charge.last.id)
-  puts "#{User.find(the_user).username} charged with #{Charge.last.type}: #{Charge.last.name}, sentenced to #{Sentence.last.name}"
+  UserCharge.create(user_id: the_user, charge_id: Charge.last.id)
+  puts "#{User.find(the_user).username} charged with #{Charge.last.category}: #{Charge.last.description}, sentenced to #{Sentence.last.name}"
 end
