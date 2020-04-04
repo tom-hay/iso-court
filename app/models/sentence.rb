@@ -1,5 +1,5 @@
 class Sentence < ApplicationRecord
-  has_one :charge
+  belongs_to :charge
   has_one :user, through: :charge
 
   validates :name, presence: true
