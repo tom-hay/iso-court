@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'sentences/new'
+  get 'sentences/create'
+  get 'sentences/destroy'
   get 'groups/index'
   get 'groups/show'
   get 'groups/new'
