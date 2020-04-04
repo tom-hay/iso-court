@@ -34,6 +34,21 @@ ActiveRecord::Schema.define(version: 2020_04_04_022550) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+
+  create_table "commitments", force: :cascade do |t|
+    t.string "type"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "user_commitments", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "commitment_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["commitment_id"], name: "index_user_commitments_on_commitment_id"
+    t.index ["user_id"], name: "index_user_commitments_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
