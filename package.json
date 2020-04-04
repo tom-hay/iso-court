@@ -1,5 +1,7 @@
 {
   "name": "iso-court",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "bootstrap": "^4.4.1"
+  }
 }
