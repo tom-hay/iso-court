@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_035851) do
+ActiveRecord::Schema.define(version: 2020_04_04_070529) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -37,14 +37,14 @@ ActiveRecord::Schema.define(version: 2020_04_04_035851) do
   end
 
   create_table "charges", force: :cascade do |t|
-    t.string "type"
+    t.string "category"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "commitments", force: :cascade do |t|
-    t.string "type"
+    t.string "category"
     t.string "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -60,6 +60,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_035851) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "charge_id"
+    t.index ["charge_id"], name: "index_sentences_on_charge_id"
   end
 
   create_table "user_charges", force: :cascade do |t|
@@ -107,17 +109,17 @@ ActiveRecord::Schema.define(version: 2020_04_04_035851) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.bigint "group_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "sentences", "charges"
   add_foreign_key "user_charges", "charges"
   add_foreign_key "user_charges", "users"
   add_foreign_key "user_commitments", "commitments"
   add_foreign_key "user_commitments", "users"
   add_foreign_key "user_groups", "groups"
   add_foreign_key "user_groups", "users"
-  add_foreign_key "user_sentences", "sentences"
-  add_foreign_key "user_sentences", "users"
 end

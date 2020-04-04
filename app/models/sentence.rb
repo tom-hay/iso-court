@@ -1,5 +1,6 @@
 class Sentence < ApplicationRecord
-  has_many :user_sentences
+  has_one :charge
+  has_one :user, through: :charge
 
   validates :name, presence: true
 end
