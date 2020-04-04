@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_022550) do
+ActiveRecord::Schema.define(version: 2020_04_04_032410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,6 +34,14 @@ ActiveRecord::Schema.define(version: 2020_04_04_022550) do
     t.string "checksum", null: false
     t.datetime "created_at", null: false
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "charges", force: :cascade do |t|
+    t.string "type"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "commitments", force: :cascade do |t|
     t.string "type"
@@ -42,9 +50,18 @@ ActiveRecord::Schema.define(version: 2020_04_04_022550) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "user_charges", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "charge_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["charge_id"], name: "index_user_charges_on_charge_id"
+    t.index ["user_id"], name: "index_user_charges_on_user_id"
+  end
+
   create_table "user_commitments", force: :cascade do |t|
-    t.integer "user_id"
-    t.integer "commitment_id"
+    t.bigint "user_id"
+    t.bigint "commitment_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_user_commitments_on_commitment_id"
@@ -65,4 +82,8 @@ ActiveRecord::Schema.define(version: 2020_04_04_022550) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "user_charges", "charges"
+  add_foreign_key "user_charges", "users"
+  add_foreign_key "user_commitments", "commitments"
+  add_foreign_key "user_commitments", "users"
 end
