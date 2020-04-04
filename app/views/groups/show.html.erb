@@ -1,0 +1,10 @@
+<h1>Groups#show</h1>
+<p>Find me in app/views/groups/show.html.erb</p>
+
+<h4><%= @group.name %></h4>
+<p>Users:</p>
+<ul>
+  <% @group.user_groups.each do |user_group| %>
+    <li><%= user_group.user.username %></li>
+  <% end %>
+</ul>
