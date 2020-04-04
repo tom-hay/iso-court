@@ -1,3 +1,4 @@
+
 <h2><%= @group.name %></h4>
 <!-- Put this into a partial -->
 <div class="container">
@@ -20,7 +21,6 @@
       </p>
     </div>
   </div>
-  <% end %>
 </div>
 <!--  -->
 <!-- Put this into partial -->
@@ -32,7 +32,11 @@
 </div>
 <!--  -->
 
+
 <%= link_to 'Snitch em up', "", class: "btn btn-primary" %>
 <%= link_to 'Start Trial', court_path, class: "btn btn-primary" %>
+
+<%= render 'lay_charges_partial' %>
+<h3>Snitch Someone</h3>
 
 <%= render partial: "shared/scoreboard" %>

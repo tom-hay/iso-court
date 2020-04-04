@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  get 'charges/new'
+  get 'charges/create'
+  get 'charges/destroy'
   get 'commitments/new'
   get 'commitments/create'
   get 'commitments/destroy'
@@ -19,5 +22,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: "pages#home"
 
-  resources :groups
+  resources :groups, only: [:show, :destroy] do
+    resources :charges, only: [:new, :create]
+  end
 end
