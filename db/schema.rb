@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_04_032410) do
+ActiveRecord::Schema.define(version: 2020_04_04_035851) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -50,6 +50,12 @@ ActiveRecord::Schema.define(version: 2020_04_04_032410) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "sentences", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "user_charges", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "charge_id"
@@ -66,6 +72,15 @@ ActiveRecord::Schema.define(version: 2020_04_04_032410) do
     t.datetime "updated_at", null: false
     t.index ["commitment_id"], name: "index_user_commitments_on_commitment_id"
     t.index ["user_id"], name: "index_user_commitments_on_user_id"
+  end
+
+  create_table "user_sentences", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "sentence_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["sentence_id"], name: "index_user_sentences_on_sentence_id"
+    t.index ["user_id"], name: "index_user_sentences_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -86,4 +101,6 @@ ActiveRecord::Schema.define(version: 2020_04_04_032410) do
   add_foreign_key "user_charges", "users"
   add_foreign_key "user_commitments", "commitments"
   add_foreign_key "user_commitments", "users"
+  add_foreign_key "user_sentences", "sentences"
+  add_foreign_key "user_sentences", "users"
 end
