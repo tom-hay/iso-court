@@ -7,7 +7,7 @@ class SentencesController < ApplicationController
     @sentence = Sentence.new(sentence_params)
     @sentence.charge = Charge.find(params[:charge_id])
 
-    if @sentence.save!
+    if @sentence.save
       redirect_to court_path(params[:group_id])
     else
       render :new
