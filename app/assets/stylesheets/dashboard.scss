@@ -1,0 +1,19 @@
+.dashboard-heading {
+	margin-bottom: 32px;
+}
+.team-cards {
+	display: grid;
+  grid-template-columns: 0.5fr;
+  grid-gap: 1rem;
+  place-content: center;
+  margin: 1em;
+}
+
+.team-card {
+	text-align: center;
+	padding: 8px;
+	&:hover {
+		transform: scale(1.05);
+    transition: 0.5s;
+	}
+}
