@@ -9,15 +9,15 @@
     </div>
     <div class="card-body">
       <% if group_charges[index].empty? %>
-      <h5 class="card-title">Has no Charges Against</h5>
-      <p class="card-text">Seems like they have been a good citizen</p>
+        <h5 class="card-title">Has no Charges Against</h5>
+        <p class="card-text">Seems like they have been a good citizen</p>
       <% else %>
-      <% group_charges[index].each do |charge| %>
-      <% current_charge = Charge.find(charge) %>
-      <h5 class="card-title"><%= current_charge.category %></h5>
-      <p class="card-text"><%= current_charge.description %></p>
-      <a href="#" class="btn btn-primary">Sentence</a>
-      <% end %>
+        <% group_charges[index].each do |charge| %>
+          <% current_charge = Charge.find(charge) %>
+          <h5 class="card-title"><%= current_charge.category %></h5>
+          <p class="card-text"><%= current_charge.description %></p>
+          <%= link_to "Sentence", new_group_charge_sentence_path(Group.find(params[:id]), current_charge), class: "btn btn-primary" %>
+        <% end %>
       <% end %>
       <a href="#" class="btn btn-primary">Next Case</a>
     </div>
