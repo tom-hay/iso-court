@@ -7,7 +7,7 @@
   </div>
 
   <div class="col-8 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
-    <h3><%= @group.name %></h3>
+    <h3><%= @group.name %> - <%= link_to "Start Trial", court_path(@group) %></h3>
 
     <div class="card-grid">
       <% Group.find(params[:id]).user_ids.each do |x| %>
