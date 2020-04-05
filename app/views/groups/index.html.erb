@@ -1,4 +1,4 @@
-<div class="content-dashboard row m-0 p-0">
+
 
   <div class="col-0 col-lg-2 p-0 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
     <div style="height: 100vh; background-color: #224C8E">
@@ -11,7 +11,7 @@
 
     <h3 class="text-center">Your Teams</h3>
     <div class="team-cards">
-      
+
     <% @groups.each do |group| %>
       <%= link_to group_path(group), :style => "text-decoration: none; color: black;" do %>
       <div class="card team-card">
@@ -30,9 +30,9 @@
     </div>
   </div>
 
-  <div class="col-3 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+  <div class="col-3 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
     <%= render partial: "shared/scoreboard" %>
 
     <%= render 'shared/commitments' %>
   </div>
-</div>
+
