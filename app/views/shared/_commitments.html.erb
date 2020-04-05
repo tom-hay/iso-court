@@ -4,3 +4,32 @@
     <p class="card-text"><%= current_user.commitments.last.description %></p>
   </div>
 </div>
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header"> Charges Against </div>
+  <% if current_user.charge_ids.empty? %>
+  <div class="card-body">
+    <p class="card-text">No Sentences this week :)</p>
+  </div>
+  <% else %>
+  <div class="card-body">
+    <% current_user.charge_ids.each do |id| %>
+      <p class="card-text"><%= Charge.find(id).category %>: <%= Charge.find(id).description %></p>
+    <% end %>
+  </div>
+  <% end %>
+</div>
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Weekly Sentence's </div>
+
+  <% if current_user.sentence_ids.empty? %>
+  <div class="card-body">
+    <p class="card-text">No Sentences this week :)</p>
+  </div>
+  <% else %>
+  <div class="card-body">
+    <% current_user.sentence_ids.each do |id| %>
+      <p class="card-text"><%= Sentence.find(id).name %></p>
+    <% end %>
+  </div>
+  <% end %>
+</div>
