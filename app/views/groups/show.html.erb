@@ -1,36 +1,48 @@
+<div class="content-dashboard row m-0 p-0">
 
-<h2><%= @group.name %></h4>
-<!-- Put this into a partial -->
-<div class="container">
-  <% Group.find(params[:id]).user_ids.each do |x| %>
-  <% y = User.find(x) %>
-  <div class="card" style="width: 18rem;">
-    <img src="..." class="card-img-top" alt="...">
-    <div class="card-body">
-      <h5 class="card-title"><%= y.username %></h5>
-      <p class="card-text">
-      <div class="score-bar d-flex flex-row">
-        <div class="commitments-filler" style="width: <%= y.commitments_score %>%;">
-        </div>
-        <div class="charges-filler" style="width: <%= y.charges_score %>%;">
-        </div>
-      </div>
-      <h6 class="card-subtitle mt-2 mb-3 text-center"><%= y.commitments.count %> commitments</h6>
-      <h6 class="card-subtitle mb-3 text-center"><%= y.charges.count %> charges</h6>
-      <h6 class="card-subtitle mb-3 text-center"><%= y.sentences.count %> sentences</h6>
-      </p>
+  <div class="col-0 col-lg-2 p-0 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <div style="height: 100vh; background-color: #224C8E">
+      <%= render 'shared/left_sidebar' %>
     </div>
   </div>
-  <% end %>
-</div>
-<!--  -->
-<!-- Put this into partial -->
-<%= render 'shared/commitments' %>
-<!--  -->
 
+  <div class="col-8 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
+    <h3><%= @group.name %></h3>
+
+    <div class="card-grid">
+      <% Group.find(params[:id]).user_ids.each do |x| %>
+        <% y = User.find(x) %>
+        <div class="card" >
+          <img src="https://scontent-syd2-1.xx.fbcdn.net/v/t1.0-9/38450845_10156744372604448_627472839087226880_o.jpg?_nc_cat=107&_nc_sid=85a577&_nc_oc=AQkUZMmVwxZwjPkeRpi3k6EC_unlitWNpevE8xA076-T0GbvQP7OHt8NlT4vTdodaZw&_nc_ht=scontent-syd2-1.xx&oh=2673d38eff95987d1fd8b0d4266956da&oe=5EB05447" class="card-img-top avatar" alt="...">
+          <div class="card-body">
+            <h5 class="card-title text-center mb-1"><%= y.username %></h5>
+            <p class="card-text">
+            <div class="score-bar d-flex flex-row">
+              <div class="commitments-filler" style="width: <%= y.commitments_score %>%;">
+              </div>
+              <div class="charges-filler" style="width: <%= y.charges_score %>%;">
+              </div>
+            </div>
+            <h6 class="card-subtitle mt-2 text-center"><%= y.commitments.count %> commitments</h6>
+            <h6 class="card-subtitle mt-2 text-center"><%= y.charges.count %> charges</h6>
+            <h6 class="card-subtitle mt-2 text-center"><%= y.sentences.count %> sentences</h6>
+            </p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <%= render 'lay_charges_partial' %>
+  </div>
+
+  <div class="col-2 p-1 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <%= render partial: "shared/scoreboard" %>
+
+    <%= render 'shared/commitments' %>
+  </div>
+
+</div>
 
 <%= link_to 'Snitch em up', "", class: "btn btn-primary" %>
 <%= link_to 'Start Trial', court_path, class: "btn btn-primary" %>
 
-<%= render 'lay_charges_partial' %>
-<h3>Snitch Someone</h3>
