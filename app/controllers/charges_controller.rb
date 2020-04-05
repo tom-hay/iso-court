@@ -1,4 +1,6 @@
 class ChargesController < ApplicationController
+  before_action :set_charge, only: :destroy
+
   def new
     @charge = Charge.new
   end
@@ -6,7 +8,7 @@ class ChargesController < ApplicationController
   def create
     @charge = Charge.new(charge_params)
 
-    if @charge.save!
+    if @charge.save
       redirect_to request.referer
     else
       render :new
@@ -14,6 +16,9 @@ class ChargesController < ApplicationController
   end
 
   def destroy
+    @charge.destroy
+
+    redirect_to request.referer
   end
 
   private

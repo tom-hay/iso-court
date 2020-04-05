@@ -8,7 +8,11 @@ class CommitmentsController < ApplicationController
   def create
     @commitment = Commitment.new(commitment_params)
 
-    redirect_to request.referer
+    if @commitment.save
+      redirect_to request.referer
+    else
+      render :new
+    end
   end
 
   def destroy
