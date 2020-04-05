@@ -7,7 +7,7 @@
         <%= render 'shared/left_sidebar' %>
       </div>
     </div>
-    <div class="col-7 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <div class="col-10 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
       </html>
       <% team_users  = Group.find(params["id"].to_i ).users.all.collect{ |x| x.username } %>
       <% group_charges = Group.find(params["id"].to_i ).users.all.collect{ |x| x.charge_ids } %>
