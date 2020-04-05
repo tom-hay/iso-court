@@ -1,6 +1,27 @@
-<h1>Groups#index</h1>
-<p>Find me in app/views/groups/index.html.erb</p>
+<div class="content-dashboard row m-0 p-0">
 
-<% @groups.each do |group| %>
-  <li><%= link_to group.name, group_path(group) %></li>
-<% end %>
+  <div class="col-0 col-lg-2 p-0 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <div style="height: 100vh; background-color: #224C8E">
+      <%= render 'shared/left_sidebar' %>
+    </div>
+  </div>
+
+  <div class="col-7 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <h1>Current User Dashboard (group#index)</h1>
+
+    <h3>Your Teams</h3>
+    <% @groups.each do |group| %>
+      <li><%= link_to group.name, group_path(group) %></li>
+    <% end %>
+
+    <h3>Join a new team</h3>
+    <p>Add form to join/create a new group</p>
+  </div>
+
+  <div class="col-3 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+    <%= render partial: "shared/scoreboard" %>
+
+    <%= render 'shared/commitments' %>
+  </div>
+
+</div>

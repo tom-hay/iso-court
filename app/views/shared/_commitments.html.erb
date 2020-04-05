@@ -1,1 +1,6 @@
-commitment-container.html.erb
+<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+  <div class="card-header">Weekly Commitment </div>
+  <div class="card-body">
+    <p class="card-text"><%= current_user.commitments.last.description %></p>
+  </div>
+</div>

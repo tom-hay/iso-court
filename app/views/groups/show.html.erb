@@ -25,12 +25,7 @@
 </div>
 <!--  -->
 <!-- Put this into partial -->
-<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-  <div class="card-header">Weekly Commitment </div>
-  <div class="card-body">
-    <p class="card-text"><%= current_user.commitments.first.description %></p>
-  </div>
-</div>
+<%= render 'shared/commitments' %>
 <!--  -->
 
 
@@ -39,4 +34,3 @@
 
 <%= render 'lay_charges_partial' %>
 <h3>Snitch Someone</h3>
-<%= render partial: "shared/scoreboard" %>
