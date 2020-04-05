@@ -100,6 +100,8 @@ CHARGES.each_with_index do |name, index|
   the_user = USERS.sample
   Charge.create(category: name[0], description: name[1], user_id: the_user)
   puts "#{name[0]}: #{name[1]}"
-  Sentence.create(name: SENTENCES[index], charge_id: Charge.last.id)
-  puts "#{User.find(the_user).username} charged with #{Charge.last.category}: #{Charge.last.description}, sentenced to #{Sentence.last.name}"
+  # Sentence.create(name: SENTENCES[index], charge_id: Charge.last.id)
+  puts "#{User.find(the_user).username} charged with #{Charge.last.category}: #{Charge.last.description}"
 end
+
+# , sentenced to #{Sentence.last.name}
