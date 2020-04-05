@@ -13,7 +13,8 @@
         <p class="card-text">Seems like they have been a good citizen</p>
       <% else %>
         <% group_charges[index].each do |charge| %>
-        <% judge = (team_users.select{ |x| x != Charge.find(charge).user.username }).sample %>
+
+        <% judge = (team_users.select{ |x| x != Charge.find(charge).user.username })[team_users.find_index(Charge.find(charge).user.username)] %>
           <% current_charge = Charge.find(charge) %>
           <h5 class="card-title">
             Judge: <%= judge.capitalize %>
