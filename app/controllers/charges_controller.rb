@@ -18,7 +18,7 @@ class ChargesController < ApplicationController
   def destroy
     @charge.destroy
 
-    redirect_to request.referer
+    redirect_to court_path(params[:group_id])
   end
 
   private
