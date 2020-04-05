@@ -7,15 +7,27 @@
   </div>
 
   <div class="col-7 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
-    <h1>Current User Dashboard (group#index)</h1>
+    <h1 class="dashboard-heading">Dashboard</h1>
 
-    <h3>Your Teams</h3>
+    <h3 class="text-center">Your Teams</h3>
+    <div class="team-cards">
+      
     <% @groups.each do |group| %>
-      <li><%= link_to group.name, group_path(group) %></li>
+      <%= link_to group_path(group), :style => "text-decoration: none; color: black;" do %>
+      <div class="card team-card">
+        <h5><%= group.name %></h5>
+        <p><%= group.users.count %> group members</p>
+        <i class="fas fa-arrow-right"></i>
+      </div>
+      <% end %>
     <% end %>
+    </div>
 
-    <h3>Join a new team</h3>
-    <p>Add form to join/create a new group</p>
+    <!-- <h3>Join a new team</h3>
+    <p>Add form to join/create a new group</p> -->
+    <div class="d-flex justify-content-center">
+      <div class="btn btn-primary">Join a new team</div>
+    </div>
   </div>
 
   <div class="col-3 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
