@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
 
   get 'charges/destroy'
-  get 'sentences/destroy'
+  # get 'sentences/destroy'
 
   # Current_user will commit
   get 'commitments/new'

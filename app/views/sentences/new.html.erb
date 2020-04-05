@@ -1,2 +1,13 @@
-<h1>Sentences#new</h1>
-<p>Find me in app/views/sentences/new.html.erb</p>
+<div class="container">
+  <div>
+    <h1>Sentencing</h1>
+  </div>
+  <%= simple_form_for [Group.find(params[:group_id]), Charge.find(params[:charge_id]), @sentence] do |f| %>
+  <div class="form-card">
+    <%= f.input :name, label: 'Conviction' %>
+    <div class="btn btn-primary">
+      <%= f.button :submit, 'Convict' %>
+    </div>
+  </div>
+    <% end %>
+</div>
