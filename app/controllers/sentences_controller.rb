@@ -7,8 +7,8 @@ class SentencesController < ApplicationController
     @sentence = Sentence.new(sentence_params)
     @sentence.charge = Charge.find(params[:charge_id])
 
-    if @sentence.save
-      redirect_to request.referer
+    if @sentence.save!
+      redirect_to court_path(params[:group_id])
     else
       render :new
     end
@@ -22,6 +22,6 @@ class SentencesController < ApplicationController
   private
 
   def sentence_params
-    params.require(:sentence).permit(:name, :charge)
+    params.require(:sentence).permit(:name)
   end
 end
