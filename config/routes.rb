@@ -8,12 +8,12 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
   resources :groups do
-    resources :charges, only: [:new, :create] do
+    resources :charges, only: [:new, :create, :destroy] do
       resources :sentences, only: [:new, :create]
     end
   end
 
-  get 'charges/destroy'
+  # get 'charges/destroy'
   # get 'sentences/destroy'
 
   # Current_user will commit

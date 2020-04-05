@@ -7,7 +7,7 @@
   </div>
 
   <div class="col-8 p-4 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
-    <h3><%= @group.name %></h3>
+    <h3><%= @group.name %> - <%= link_to "Start Trial", court_path(@group) %></h3>
 
     <div class="card-grid">
       <% Group.find(params[:id]).user_ids.each do |x| %>
@@ -27,22 +27,52 @@
             <h6 class="card-subtitle mt-2 text-center"><%= y.charges.count %> charges</h6>
             <h6 class="card-subtitle mt-2 text-center"><%= y.sentences.count %> sentences</h6>
             </p>
+
+            <!-- Modal button -->
+            <button type="button" class="btn btn-primary my_link" id="btnModal" data-toggle="modal" data-target="#my-modal" data-val=<%= y.id %> data-name= <%= y.username %> >
+              Snitch em up'
+            </button>
+
           </div>
         </div>
       <% end %>
     </div>
-
-    <%= render 'lay_charges_partial' %>
   </div>
 
   <div class="col-2 p-1 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
     <%= render partial: "shared/scoreboard" %>
-
     <%= render 'shared/commitments' %>
   </div>
 
 </div>
 
-<%= link_to 'Snitch em up', "", class: "btn btn-primary" %>
-<%= link_to 'Start Trial', court_path, class: "btn btn-primary" %>
+<!-- Modal -->
+<div class="modal fade" id="my-modal" tabindex="-1" role="dialog" aria-labelledby="my-modal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLabel"></h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <%= render 'lay_charges_partial' %>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+  modalbtns = document.querySelectorAll('#btnModal')
+
+  modalbtns.forEach(btn => {
+    btn.addEventListener('click', (event) => {
+      let name = event.target.dataset["name"];
+      let value = event.target.dataset["val"];
+
+      document.querySelector(".modal-title").innerText = "Snitch " + name;
+      document.getElementById("charge_user_id").value = value;
+    });
+  });
+</script>

@@ -1,7 +1,4 @@
 <div class="container">
-  <div>
-    <h3>Snitch Someone</h3>
-  </div>
   <%= simple_form_for [@group, Charge.new] do |f| %>
   <div class="form-card">
     <%#= f.association :user, collection: @group.users.collect { |x|  [ x.id.to_i, x.username ] }, label_method: :second, value_method: :first, prompt: "Choose a User" %>
@@ -14,5 +11,5 @@
     <%= f.input :description %>
     <%= f.button :submit, 'Lay Charge', class: "btn btn-primary" %>
   </div>
-    <% end %>
+  <% end %>
 </div>
