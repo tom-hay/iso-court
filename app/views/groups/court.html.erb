@@ -35,6 +35,7 @@
 
                 <% if current_charge.sentence.nil? %>
                 <%= link_to "Sentence", new_group_charge_sentence_path(Group.find(params[:id]), current_charge), class: "btn btn-primary" %>
+                <%= link_to "Not Guilty", group_charge_path(Group.find(params[:id]), current_charge), method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
                 <% else %>
                 <h5>Sentence: <%= current_charge.sentence.name %></h5>
                 <% end %>
