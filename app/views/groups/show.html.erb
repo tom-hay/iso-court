@@ -1,4 +1,4 @@
-<div class="content-dashboard row m-0 p-0">
+<!-- <div class="content-dashboard row m-0 p-0" style="height: 100vh"> -->
 
   <div class="col-0 col-lg-2 p-0 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
     <div style="height: 100vh; background-color: #224C8E">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  <div class="col-2 p-1 d-none d-lg-flex flex-column" style="position: sticky; flex: 1">
+  <div class="col-2 p-1 d-none d-lg-flex flex-column" style="position: sticky; flex: 1; height: 100vh; overflow: scroll">
     <%= render partial: "shared/scoreboard" %>
     <%= render 'shared/commitments' %>
   </div>
@@ -61,7 +61,7 @@
       </div>
     </div>
   </div>
-</div>
+
 
 <script>
   modalbtns = document.querySelectorAll('#btnModal')
